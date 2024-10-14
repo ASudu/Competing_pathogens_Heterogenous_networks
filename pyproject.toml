@@ -2,7 +2,11 @@
 name = "competing-pathogens-heterogenous-networks"
 version = "0.1.0"
 description = "Add your description here"
-dependencies = []
+dependencies = [
+    "ipykernel>=6.29.5",
+    "networkx>=3.4.1",
+    "matplotlib>=3.9.2",
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 
