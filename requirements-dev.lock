@@ -51,6 +51,7 @@ networkx==3.4.1
 numpy==2.1.2
     # via contourpy
     # via matplotlib
+    # via scipy
 packaging==24.1
     # via ipykernel
     # via matplotlib
@@ -80,6 +81,8 @@ python-dateutil==2.9.0.post0
 pyzmq==26.2.0
     # via ipykernel
     # via jupyter-client
+scipy==1.14.1
+    # via competing-pathogens-heterogenous-networks
 six==1.16.0
     # via asttokens
     # via python-dateutil
