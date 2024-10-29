@@ -51,10 +51,13 @@ networkx==3.4.1
 numpy==2.1.2
     # via contourpy
     # via matplotlib
+    # via pandas
     # via scipy
 packaging==24.1
     # via ipykernel
     # via matplotlib
+pandas==2.2.3
+    # via competing-pathogens-heterogenous-networks
 parso==0.8.4
     # via jedi
 pexpect==4.9.0
@@ -78,6 +81,9 @@ pyparsing==3.2.0
 python-dateutil==2.9.0.post0
     # via jupyter-client
     # via matplotlib
+    # via pandas
+pytz==2024.2
+    # via pandas
 pyzmq==26.2.0
     # via ipykernel
     # via jupyter-client
@@ -98,5 +104,7 @@ traitlets==5.14.3
     # via jupyter-client
     # via jupyter-core
     # via matplotlib-inline
+tzdata==2024.2
+    # via pandas
 wcwidth==0.2.13
     # via prompt-toolkit

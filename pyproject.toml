@@ -7,6 +7,7 @@ dependencies = [
     "networkx>=3.4.1",
     "matplotlib>=3.9.2",
     "scipy>=1.14.1",
+    "pandas>=2.2.3",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
