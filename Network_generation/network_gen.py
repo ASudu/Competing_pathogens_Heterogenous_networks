@@ -19,12 +19,13 @@ def save_edgelist(G: nx.Graph, save_file: str)-> None:
         save_file (str): File name for the edgelist file is saved.
     """
     edges = list(G.edges)
-    str_edges = [f"{e[0]} {e[1]}\n" for e in edges]
+    str_edges = [f"{e[0]} {e[1]}" for e in edges]
+    to_write = "\n".join(str_edges)
 
     save_path = "../data/networks/" + save_file
 
     with open(save_path, "w") as f:
-        f.writelines(str_edges)
+        f.write(to_write)
 # Handle isolated nodes
 def handle_isolated_nodes(G: nx.Graph, iso: list, mean:int) -> nx.Graph:
 
@@ -126,34 +127,6 @@ def gen_hetero_deg(n:int, mean: float, var: list[int]) -> nx.Graph:
     np.random.seed(11)
     s = []
 
-    # # Get parameters for gamma distribution
-    # theta = var[0]/ (mean - 1)
-    # k = (mean - 1)**2 / var[0]
-
-    # # Generate samples from gamma distribution
-    # samples = gamma.rvs(a=theta, scale=k, size=len(var)*n)
-    
-    # # Split and discretize the sample
-    # for i in range(len(var)):
-    #     s.append([round(x) + 1 for x in samples[i*n:(i+1)*n] if (x - int(x)) > 0])
-    
-    # act_means = [np.mean(sample) for sample in s]
-    # for i in range(1, len(var)):
-    #     for j in range(len(s[i]) - 1):
-    #         p = np.random.random() * var[i]
-    #         s[i][j] += (act_means[0] - act_means[i]) - p
-    #         s[i][j + 1] += (act_means[0] - act_means[i]) + p
-        
-    #     s[i] = [round(x) + 1 for x in s[i] if (x - int(x))!= 0.0]
-
-    # # Check if all lists in s contain integers and print
-    # for idx, sample in enumerate(s):
-    #     if all(isinstance(x, int) for x in sample):
-    #         print(f"List {idx} contains all integers.")
-    #     else:
-    #         print(f"List {idx} does not contain all integers.")
-
-
     # Generate samples from gamma distribution
     for i in range(len(var)):
         s.append([round(x) + 1 for x in gamma.rvs(a=var[i]/(mean-1), scale=(mean-1)**2/var[i], size=n, random_state=42) if (x - int(x)) > 0])
@@ -188,44 +161,23 @@ def gen_small_world(n:int, k:int, p:float) -> nx.Graph:
     return nx.watts_strogatz_graph(n,k,p)
 
 # Heterogeneous network - clustering coeffecient
-def gen_hetero_cc(n:int, k: float, cc:float, p:float=0.1, tol:float=1e-3) -> nx.Graph:
+def gen_hetero_cc(n:int, k: float, p_val:list) -> nx.Graph:
     """Generates a network with target clustering coeffecient.
 
     Args:
         n (int): Number of nodes in the network
         k (float): average degree of the network
-        cc (float): Target clustering coeffecient
+        p_val (list): List of rewiring probabilities for each network
 
     Returns:
         nx.Graph: Required network on n nodes with average degree k and clustering coeffecient cc
     """
 
-    # Take a small world network of same size and average degree
-    G = gen_small_world(n,math.floor(k),p)
-
-    gcc = nx.transitivity(G) # Global clustering coeffecient
-    nodes = list(G.nodes)
-    seed = np.random.default_rng() # Random number generator
-    while abs(gcc - cc) > tol:
-        print(f"GCC: {gcc}")
-        # rewire edges from each node
-        # loop over all nodes in order (label) and neighbors in order (distance)
-        # no self loops or multiple edges allowed
-        for j in range(1, k // 2 + 1):  # outer loop is neighbors
-            targets = nodes[j:] + nodes[0:j]  # first j nodes are now last in list
-            # inner loop in node order
-            for u, v in zip(nodes, targets):
-                if seed.random() < p:
-                    w = seed.choice(nodes)
-                    # Enforce no self-loops or multiple edges
-                    while w == u or G.has_edge(u, w):
-                        w = seed.choice(nodes)
-                        if G.degree(u) >= n - 1:
-                            break  # skip this rewiring
-                    else:
-                        G.remove_edge(u, v)
-                        G.add_edge(u, w)
-        return G
+    for p in p_val:
+        G = gen_small_world(n,k,p)
+        cc = nx.transitivity(G)
+        print(f"Clustering coeffecient: {cc}")
+        save_edgelist(G,f"hetero_cc_{round(cc,2)}.txt")
 
 
 
@@ -248,11 +200,10 @@ n = 1000
 # save_edgelist(B,"homog_regular.txt")
 # print("Generated regular graph")
 
-# Generate hetero graph - degree distribution
-G = gen_hetero_deg(n,mean=4,var=[1,3,6])
-for i in range(len(G)):
-    save_edgelist(G[i],f"hetero_deg_var_{round(np.var([G[i].degree(x) for x in list(G[i].nodes)]),2)}.txt")
-# # Generate hetero graph - clustering coeffecient
-# F = gen_hetero_cc(n,k=4,cc=0.24,p=0.1)
-# save_edgelist(F,"hetero_cc_0.24.txt")
-# Generate 3 samples from gamma distribution each of size n and each with same mean equal to 4 but different variances 1, 3, and 6 respectively
+# # Generate hetero graph - degree distribution
+# G = gen_hetero_deg(n,mean=4,var=[1,3,6])
+# for i in range(len(G)):
+#     save_edgelist(G[i],f"hetero_deg_var_{round(np.var([G[i].degree(x) for x in list(G[i].nodes)]),2)}.txt")
+
+# Generate hetero graph - clustering coeffecient
+gen_hetero_cc(n,k=4,p_val=[0.005, 0.1, 0.5])
