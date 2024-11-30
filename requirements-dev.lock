@@ -41,6 +41,7 @@ kiwisolver==1.4.7
     # via matplotlib
 matplotlib==3.9.2
     # via competing-pathogens-heterogenous-networks
+    # via seaborn
 matplotlib-inline==0.1.7
     # via ipykernel
     # via ipython
@@ -53,11 +54,13 @@ numpy==2.1.2
     # via matplotlib
     # via pandas
     # via scipy
+    # via seaborn
 packaging==24.1
     # via ipykernel
     # via matplotlib
 pandas==2.2.3
     # via competing-pathogens-heterogenous-networks
+    # via seaborn
 parso==0.8.4
     # via jedi
 pexpect==4.9.0
@@ -89,6 +92,8 @@ pyzmq==26.2.0
     # via jupyter-client
 scipy==1.14.1
     # via competing-pathogens-heterogenous-networks
+seaborn==0.13.2
+    # via competing-pathogens-heterogenous-networks
 six==1.16.0
     # via asttokens
     # via python-dateutil
@@ -97,6 +102,8 @@ stack-data==0.6.3
 tornado==6.4.1
     # via ipykernel
     # via jupyter-client
+tqdm==4.67.1
+    # via competing-pathogens-heterogenous-networks
 traitlets==5.14.3
     # via comm
     # via ipykernel
