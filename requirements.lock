@@ -47,7 +47,7 @@ matplotlib-inline==0.1.7
     # via ipython
 nest-asyncio==1.6.0
     # via ipykernel
-networkx==3.4.1
+networkx==3.4.2
     # via competing-pathogens-heterogenous-networks
 numpy==2.1.2
     # via contourpy
