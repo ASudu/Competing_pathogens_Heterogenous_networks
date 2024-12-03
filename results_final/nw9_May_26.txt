@@ -1,0 +1,14 @@
+Betas: 0.115, 0.12937500000000002, 0.14375000000000002
+    
+    R0 effective 1: 596.637965622406
+    R0 effective 2: 2402.7545911577004
+    R0 effective 3: 522.4441608449893
+    
+    Epidemic size: 0.622793986039019
+    
+    Peak infection: 0.5457508501879363
+    Peak time: 422
+    
+    Percolation threshold 1: 0.00019274670172896778
+    Percolation threshold 2: 5.384445023062645e-05
+    Percolation threshold 3: 0.000275149022179714
