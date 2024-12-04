@@ -1,5 +1,7 @@
 # Competing_pathogens_Heterogenous_networks
 
+[Website](https://sites.google.com/view/viralevolution-diseasedynamics/home)
+
 ## Introduction
 
 In this project, we study the following:
@@ -10,8 +12,8 @@ In this project, we study the following:
 | Team member name |
 | ---------------- |
 | [Sudarshan Anand](https://github.com/ASudu) |
-| Rohini Janivara |
-| Alejandro Danies Lopez |
+| [Rohini Janivara](https://github.com/rohinijanivara) |
+| [Alejandro Danies Lopez](https://github.com/adaniesl) |
 
 
 ## Setup
