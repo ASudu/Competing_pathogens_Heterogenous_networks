@@ -9,7 +9,7 @@ In this project, we study the following:
 ## Contributors
 | Team member name |
 | ---------------- |
-| Sudarshan Anand |
+| [Sudarshan Anand](https://github.com/ASudu) |
 | Rohini Janivara |
 | Alejandro Danies Lopez |
 
